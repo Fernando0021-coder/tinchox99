@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Página del Streamer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --bg-dark: #0f0c29;
+        --bg-purple: #302b63;
+        --bg-light: #24243e;
+        --accent-primary: #8a2be2; /* BlueViolet */
+        --accent-secondary: #d8bfd8; /* Thistle */
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --text-main: #ffffff;
+        --text-muted: #b3b3b3;
+        --card-hover: rgba(255, 255, 255, 0.1);
+      }
+
+      * { box-sizing: border-box; }
+      
+      body {
+        margin: 0;
+        font-family: 'Outfit', sans-serif;
+        background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+      }
+
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1000px;
+        background: rgba(18, 18, 28, 0.6);
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Header & Profile */
+      .hero {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 40px;
+        position: relative;
+      }
+
+      .profile-container {
+        position: relative;
+      }
+
+      .logo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%; /* Circular profile */
+        background: var(--glass-bg);
+        border: 3px solid rgba(138, 43, 226, 0.5);
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .logo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+      }
+
+      .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .status-badge {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        background-color: #43b581; /* Green for online */
+        border: 3px solid #1a1a2e;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+      }
+
+      .hero-content {
+        flex: 1;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #fff, #d8bfd8);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.5px;
+      }
+
+      p.lead {
+        margin: 8px 0 20px;
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        font-weight: 300;
+      }
+
+      /* Social Links */
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 20px;
+        border-radius: 12px;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.95rem;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+        transform: translateX(-100%);
+        transition: 0.5s;
+      }
+
+      .btn:hover::before {
+        transform: translateX(100%);
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        border-color: rgba(255,255,255,0.3);
+        background: var(--card-hover);
+      }
+
+      .btn.discord:hover { border-color: #5865F2; box-shadow: 0 5px 20px rgba(88, 101, 242, 0.4); }
+      .btn.kick:hover { border-color: #53fc18; box-shadow: 0 5px 20px rgba(83, 252, 24, 0.4); } /* Kick green accent */
+      .btn.tiktok:hover { border-color: #fe2c55; box-shadow: 0 5px 20px rgba(254, 44, 85, 0.4); }
+      
+      .icon { font-size: 1.2rem; }
+
+      /* Clips Section */
+      .section-title {
+        font-size: 1.5rem;
+        margin: 40px 0 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--accent-secondary);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .clips {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+      }
+
+      .clip {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        overflow: hidden;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .clip:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        border-color: var(--accent-primary);
+      }
+
+      .thumb {
+        width: 100%;
+        aspect-ratio: 16/9;
+        background: linear-gradient(135deg, #2a0845 0%, #6441a5 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      
+      .play-icon {
+        font-size: 2rem;
+        opacity: 0.7;
+        transition: 0.3s;
+      }
+      
+      .clip:hover .play-icon {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+
+      .meta {
+        padding: 15px;
+        background: rgba(0,0,0,0.2);
+        flex-grow: 1;
+      }
+
+      .meta h4 {
+        margin: 0 0 5px;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+
+      .meta p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* Schedule Section */
+      .schedule {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+        margin: 30px 0;
+      }
+
+      .schedule-item {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        transition: 0.3s;
+      }
+
+      .schedule-item:hover {
+        background: var(--card-hover);
+        transform: translateY(-2px);
+      }
+
+      .day {
+        font-weight: 700;
+        color: var(--accent-secondary);
+        margin-bottom: 5px;
+        display: block;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+      }
+
+      .time {
+        font-size: 0.9rem;
+        color: #fff;
+      }
+
+      /* Subscription Goal Bar */
+      .goal-container {
+        margin: 20px 0;
+        background: rgba(0,0,0,0.2);
+        border-radius: 20px;
+        padding: 15px;
+        border: 1px solid var(--glass-border);
+      }
+
+      .goal-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .progress-bar {
+        height: 12px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 6px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #8a2be2, #d8bfd8);
+        width: 75%; /* Cambia este porcentaje según tu meta */
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        animation: shimmer 2s infinite linear;
+        background-size: 200% 100%;
+      }
+
+      @keyframes shimmer {
+        0% { background-position: 100% 0; }
+        100% { background-position: -100% 0; }
+      }
+
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        border-top: 1px solid var(--glass-border);
+        padding-top: 20px;
+      }
+
+      @media (max-width: 600px) {
+        .hero { flex-direction: column; text-align: center; }
+        .links { justify-content: center; }
+        .container { padding: 20px; }
+        h1 { font-size: 2rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="hero">
+        <div class="profile-container">
+          <div class="logo">
+            <!-- REEMPLAZA ESTO: Tu foto de perfil -->
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='200' height='200' fill='%232a0845'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='80' fill='%23ffffff'>S</text></svg>" alt="Avatar Streamer">
+          </div>
+          <!-- Indicador de estado (opcional) -->
+          <div class="status-badge" title="Online"></div>
+        </div>
+        
+        <div class="hero-content">
+          <h1>NombreDelStreamer</h1>
+          <p class="lead">🔥 Pro Player | 🎮 Variety Streamer | 💜 Comunidad</p>
+
+          <!-- Barra de Meta de Suscripciones -->
+          <div class="goal-container">
+            <div class="goal-label">
+              <span>Meta de Subs (Septiembre)</span>
+              <span>750 / 1000</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+          </div>
+
+          <nav class="links">
+            <a class="btn discord" href="https://discord.gg/tu-invite" target="_blank">
+              <span class="icon">👾</span> Discord
+            </a>
+            <a class="btn kick" href="https://kick.com/tu-canal" target="_blank">
+              <span class="icon">🟩</span> Kick
+            </a>
+            <a class="btn tiktok" href="https://tiktok.com/@tu-usuario" target="_blank">
+              <span class="icon">🎵</span> TikTok
+            </a>
+            <a class="btn" href="https://twitter.com/tu-usuario" target="_blank">
+              <span class="icon">🐦</span> Twitter
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <div class="section-title">
+        <span>📅</span> Horario Semanal
+      </div>
+
+      <div class="schedule">
+        <div class="schedule-item">
+          <span class="day">Lun</span>
+          <span class="time">18:00 PM</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Mar</span>
+          <span class="time">18:00 PM</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Mié</span>
+          <span class="time">Descanso</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Jue</span>
+          <span class="time">19:00 PM</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Vie</span>
+          <span class="time">20:00 PM</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Sáb</span>
+          <span class="time">Evento</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Dom</span>
+          <span class="time">Descanso</span>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <span>🎬</span> Mejores Momentos
+      </div>
+
+      <section class="clips">
+        <!-- Clip 1 -->
+        <a class="clip" href="#" target="_blank">
+          <div class="thumb">
+            <span class="play-icon">▶</span>
+          </div>
+          <div class="meta">
+            <h4>ACE en Valorant 🔫</h4>
+            <p><span>Hace 2 días</span> <span>15k vistas</span></p>
+          </div>
+        </a>
+
+        <!-- Clip 2 -->
+        <a class="clip" href="#" target="_blank">
+          <div class="thumb">
+            <span class="play-icon">▶</span>
+          </div>
+          <div class="meta">
+            <h4>Reacción Épica 😂</h4>
+            <p><span>Hace 1 semana</span> <span>8.2k vistas</span></p>
+          </div>
+        </a>
+
+        <!-- Clip 3 -->
+        <a class="clip" href="#" target="_blank">
+          <div class="thumb">
+            <span class="play-icon">▶</span>
+          </div>
+          <div class="meta">
+            <h4>Fail del año 💀</h4>
+            <p><span>Hace 3 semanas</span> <span>22k vistas</span></p>
+          </div>
+        </a>
+
+        <!-- Clip 4 -->
+        <a class="clip" href="#" target="_blank">
+          <div class="thumb">
+            <span class="play-icon">▶</span>
+          </div>
+          <div class="meta">
+            <h4>Just Chatting Chill ☕</h4>
+            <p><span>Ayer</span> <span>5k vistas</span></p>
+          </div>
+        </a>
+      </section>
+
+      <!-- Horario y Meta de Suscripciones (nuevo) -->
+      <div class="schedule">
+        <div class="schedule-item">
+          <span class="day">Lunes</span>
+          <span class="time">18:00 - 21:00</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Miércoles</span>
+          <span class="time">18:00 - 21:00</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Viernes</span>
+          <span class="time">18:00 - 21:00</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Domingo</span>
+          <span class="time">17:00 - 20:00</span>
+        </div>
+      </div>
+
+      <div class="goal-container">
+        <div class="goal-label">
+          <span>Meta de Suscriptores</span>
+          <span>75%</span> <!-- Cambia este porcentaje según tu meta -->
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 75%;"></div>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2025 NombreDelStreamer. Todos los derechos reservados.</p>
+        <p style="font-size: 0.75rem; opacity: 0.6;">Diseñado con 💜 para la comunidad.</p>
+      </footer>
+    </div>
+  </body>
+</html>

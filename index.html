@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Página del Streamer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <header class="hero">
+        <div class="profile-container">
+          <div class="logo">
+            
+            <img src="logo.jpg" width="200" height="200" alt="Avatar Streamer">
+          </div>
+          <!-- Indicador de estado (opcional) -->
+          <div class="status-badge" title="Online"></div>
+        </div>
+        
+        <div class="hero-content">
+          <h1>tinchox99</h1>
+          <p class="lead">Hola 👋 Juego Minecraft, Free Fire, Fortnite, Roblox, L4D y más 🎮 Me gusta charlar, divertirme</p>
+
+          <!-- Barra de Meta de Suscripciones -->
+          <div class="goal-container">
+            <div class="goal-label">
+              <span>Meta de Subs (Septiembre)</span>
+              <span>750 / 1000</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+          </div>
+
+          <nav class="links">
+            <a class="btn discord" href="https://discord.gg/tu-invite" target="_blank">
+              <span class="icon">👾</span> Discord
+            </a>
+            <a class="btn kick" href="https://kick.com/tu-canal" target="_blank">
+              <span class="icon">🟩</span> Kick
+            </a>
+            <a class="btn tiktok" href="https://tiktok.com/@tu-usuario" target="_blank">
+              <span class="icon">🎵</span> TikTok
+            </a>
+            <a class="btn" href="https://twitter.com/tu-usuario" target="_blank">
+              <span class="icon">🐦</span> Twitter
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <div class="section-title">
+        <span>📅</span> Horario Semanal
+      </div>
+
+      <div class="schedule">
+        <div class="schedule-item">
+          <span class="day">Lun</span>
+          <span class="time">18:00 PM</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Mar</span>
+          <span class="time">18:00 PM</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Mié</span>
+          <span class="time">Descanso</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Jue</span>
+          <span class="time">19:00 PM</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Vie</span>
+          <span class="time">20:00 PM</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Sáb</span>
+          <span class="time">Evento</span>
+        </div>
+        <div class="schedule-item">
+          <span class="day">Dom</span>
+          <span class="time">Descanso</span>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <span>🎬</span> Mejores Momentos
+      </div>
+
+      <!-- Contenedor dinámico de clips -->
+      <section id="clips-container" class="clips">
+        <!-- Los clips se cargarán aquí desde script.js -->
+      </section>
+
+      <footer>
+        <p>© 2025 NombreDelStreamer. Todos los derechos reservados.</p>
+        <p style="font-size: 0.75rem; opacity: 0.6;">Diseñado con 💜 para la comunidad.</p>
+      </footer>
+    </div>
+
+    <!-- Modal para Video -->
+    <div id="video-modal" class="modal-overlay">
+      <div class="modal-content">
+        <button class="close-modal" onclick="closeModal()">×</button>
+        <div id="modal-video-container" class="video-container">
+          <!-- El iframe se inyectará aquí -->
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
