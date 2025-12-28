@@ -8,21 +8,21 @@ const clipsData = [
         id: "clip1",
         title: "Peter Potter",
         thumbnail: "",
-        videoUrl: "videos/Click1.0.mp4",
+        videoUrl: "https://fernando0021-coder.github.io/tinchox99/videos/Click1.0.mp4",
         type: "local"
     },
     {
         id: "clip2",
         title: "Vamos al nether es fácil decíamos",
         thumbnail: "",
-        videoUrl: "videos/Click2.0.mp4",
+        videoUrl: "https://fernando0021-coder.github.io/tinchox99/videos/Click2.0.mp4",
         type: "local"
     },
     {
         id: "clip3",
         title: "¿Dónde comienza la amistad y dónde termina?",
         thumbnail: "",
-        videoUrl: "videos/Click3.0.mp4",
+        videoUrl: "https://fernando0021-coder.github.io/tinchox99/videos/Click3.0.mp4",
         type: "local"
     }
 ];
